@@ -16,11 +16,6 @@ RUN wget http://mirrors.kernel.org/ubuntu/pool/universe/e/eigen3/libeigen3-dev_3
 RUN dpkg -i /tmp/libeigen3-dev_3.3.4-4_all.deb
 RUN rm /tmp/libeigen3-dev_3.3.4-4_all.deb
 
-
-#RUN apt-get autoclean \
-    #&& apt-get autoremove \
-    #rm -rf /var/lib/apt/lists/*
-
 # Install Ceres
 RUN cd /tmp && git clone --depth=1 -b 1.14.0 https://ceres-solver.googlesource.com/ceres-solver
 RUN cd /tmp/ceres-solver && cmake . && make -j$(nproc) && make install
@@ -32,12 +27,6 @@ RUN mkdir -p /home/ros/catkin_ws/src
 RUN cd /home/ros/catkin_ws/src && git clone --depth=1 https://github.com/Livox-SDK/Livox-SDK.git
 RUN cd /home/ros/catkin_ws/src && git clone https://github.com/Livox-SDK/livox_ros_driver
 RUN cd /home/ros/catkin_ws/src && git clone https://github.com/Livox-SDK/LIO-Livox
-
-
-#RUN git clone --depth=1 https://github.com/Livox-SDK/Livox-SDK.git
-#RUN git clone --depth=1 https://github.com/Livox-SDK/livox_ros_driver.git ws_livox/src
-#RUN git clone --depth=1 https://github.com/BellosC/horizon_highway_slam.git root/horizon_highway_slam
-
 
 # Specify Eigen version 3.3 - Must be done for Ubuntu 16.04
 RUN sed -i 's/Eigen3\sREQUIRED/Eigen3 3.3 REQUIRED/g' /home/ros/catkin_ws/src/LIO-Livox/CMakeLists.txt

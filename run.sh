@@ -13,7 +13,6 @@ docker run \
     --env IMU="${2:-0}" \
     --ipc host \
     -e DISPLAY --volume /tmp/.X11-unix:/tmp/.X11-unix --volume /dev:/dev --privileged fca645b2fb4b
-    #  vietanhdev/lio_livox:ros-kinetic-lio-1.0  
 
     
 
